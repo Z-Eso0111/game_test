@@ -19,25 +19,13 @@
         }
 
         .ball {
-            width: 20px;
-            height: 20px;
+            width: 50px;
+            height: 50px;
             background-color: #fff;
             border-radius: 50%;
             position: absolute;
             top: 150px;
             left: 150px;
-            animation: move 2s infinite;
-        }
-
-        @keyframes move {
-            from {
-                top: 150px;
-                left: 150px;
-            }
-            to {
-                top: 250px;
-                left: 250px;
-            }
         }
     </style>
 </head>
@@ -52,33 +40,13 @@
     <script>
         const ball = document.querySelector(".ball");
 
-        function checkCollision() {
-            if (ball.getBoundingClientRect().top <= 0 || ball.getBoundingClientRect().top >= 300 ||
-                ball.getBoundingClientRect().left <= 0 || ball.getBoundingClientRect().left >= 300) {
-                alert("Kaybettiniz!");
-            }
-        }
-
         window.addEventListener("keydown", (event) => {
-            switch (event.keyCode) {
-                case 38: // Yukarı ok
-                    ball.style.top = parseInt(ball.style.top) - 10 + "px";
-                    break;
-                case 40: // Aşağı ok
-                    ball.style.top = parseInt(ball.style.top) + 10 + "px";
-                    break;
-                case 37: // Sol ok
-                    ball.style.left = parseInt(ball.style.left) - 10 + "px";
-                    break;
-                case 39: // Sağ ok
-                    ball.style.left = parseInt(ball.style.left) + 10 + "px";
-                    break;
+            if (event.keyCode === 32) {
+                ball.style.top = Math.floor(Math.random() * 300) + "px";
+                ball.style.left = Math.floor(Math.random() * 300) + "px";
             }
-
-            checkCollision();
         });
     </script>
 
 </body>
 </html>
-
