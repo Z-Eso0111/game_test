@@ -57,9 +57,11 @@
             // Topun konumunu güncelle
             ball.style.left = ball.offsetLeft + xDiff / speed + "px";
             ball.style.top = ball.offsetTop + yDiff / speed + "px";
+
+            // Topun hareketini yumuşat
+            ball.style.transition = "left 0.5s ease-in-out, top 0.5s ease-in-out";
         }, 100);
     </script>
 
 </body>
 </html>
-
