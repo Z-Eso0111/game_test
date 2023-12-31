@@ -56,6 +56,14 @@
             border-radius: 50%;
             position: absolute;
         }
+
+        .bullet {
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+        }
     </style>
 </head>
 <body>
@@ -74,6 +82,7 @@
         const ball = document.querySelector(".ball");
         const goal = document.querySelector(".goal");
         const enemies = [];
+        const bullets = [];
 
         function checkCollision() {
             if (ball.getBoundingClientRect().top <= goal.getBoundingClientRect().top + goal.getBoundingClientRect().height &&
@@ -91,6 +100,18 @@
                     alert("Kaybettiniz!");
                 }
             }
+
+            for (const bullet of bullets) {
+                for (const enemy of enemies) {
+                    if (bullet.getBoundingClientRect().top <= enemy.getBoundingClientRect().top + enemy.getBoundingClientRect().height &&
+                        bullet.getBoundingClientRect().left <= enemy.getBoundingClientRect().left + enemy.getBoundingClientRect().width &&
+                        bullet.getBoundingClientRect().right >= enemy.getBoundingClientRect().left &&
+                        bullet.getBoundingClientRect().bottom >= enemy.getBoundingClientRect().top) {
+                        enemies.splice(enemies.indexOf(enemy), 1);
+                        bullets.splice(bullets.indexOf(bullet), 1);
+                    }
+                }
+            }
         }
 
         window.addEventListener("keydown", (event) => {
@@ -99,26 +120,4 @@
                     ball.style.top = parseInt(ball.style.top) - 10 + "px";
                     break;
                 case 40: // Aşağı ok
-                    ball.style.top = parseInt(ball.style.top) + 10 + "px";
-                    break;
-                case 37: // Sol ok
-                    ball.style.left = parseInt(ball.style.left) - 10 + "px";
-                    break;
-                case 39: // Sağ ok
-                    ball.style.left = parseInt(ball.style.left) + 10 + "px";
-                    break;
-            }
-
-            checkCollision();
-        });
-
-        function startGame() {
-            const level = 1;
-
-            function createEnemy() {
-                const enemy = document.createElement("div");
-                enemy.className = "enemy";
-                enemy.style.top = Math.floor(Math.random() * 300) + "px";
-                enemy.style.left = Math.floor(Math.random() * 300) + "px";
-
-
+                    ball.style.top = parseInt(ball.style
