@@ -51,11 +51,10 @@
             const xDiff = mouseX - ball.offsetLeft;
             const yDiff = mouseY - ball.offsetTop;
 
-            ball.style.left = ball.offsetLeft + (xDiff / 10) + "px";
-            ball.style.top = ball.offsetTop + (yDiff / 10) + "px";
+            ball.style.left = ball.offsetLeft + xDiff + "px";
+            ball.style.top = ball.offsetTop + yDiff + "px";
         }, 100);
     </script>
 
 </body>
 </html>
-
