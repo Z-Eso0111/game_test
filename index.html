@@ -49,11 +49,18 @@
 
         setInterval(() => {
             // Topun konumunu güncelle
-            ball.style.left = mouseX * 0.8 + "px";
-            ball.style.top = mouseY * 0.8 + "px";
+            ball.style.left = mouseX + "px";
+            ball.style.top = mouseY + "px";
         }, 100);
+
+        const follow = () => {
+            // Topun konumunu farenin konumuna ayarla
+            ball.style.left = mouseX + "px";
+            ball.style.top = mouseY + "px";
+        };
+
+        setInterval(follow, 10);
     </script>
 
 </body>
 </html>
-
