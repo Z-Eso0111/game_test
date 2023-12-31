@@ -60,9 +60,14 @@
 
             // Topun hareketini yumuşat
             ball.style.transition = "left 0.5s ease-in-out, top 0.5s ease-in-out";
+
+            // Takılma anlarında topu hareket ettir
+            if (xDiff === 0 && yDiff === 0) {
+                ball.style.left = ball.offsetLeft + Math.random() * 10 + "px";
+                ball.style.top = ball.offsetTop + Math.random() * 10 + "px";
+            }
         }, 100);
     </script>
 
 </body>
 </html>
-
