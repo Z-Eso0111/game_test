@@ -55,8 +55,8 @@
 
         const follow = () => {
             // Topun konumunu farenin konumuna ayarla
-            ball.style.left = mouseX + "px";
-            ball.style.top = mouseY + "px";
+            ball.style.left = mouseX * 0.6 + "px";
+            ball.style.top = mouseY * 0.6 + "px";
         };
 
         setInterval(follow, 10);
@@ -64,4 +64,3 @@
 
 </body>
 </html>
-
