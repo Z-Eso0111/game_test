@@ -24,45 +24,20 @@
             background-color: #fff;
             border-radius: 50%;
             position: absolute;
-            top: 50px;
-            left: 50px;
+            top: 150px;
+            left: 150px;
             animation: move 2s infinite;
         }
 
         @keyframes move {
             from {
-                top: 50px;
-                left: 50px;
+                top: 150px;
+                left: 150px;
             }
             to {
                 top: 250px;
                 left: 250px;
             }
-        }
-
-        .goal {
-            width: 100px;
-            height: 100px;
-            background-color: #fff;
-            position: absolute;
-            top: 100px;
-            left: 100px;
-        }
-
-        .enemy {
-            width: 20px;
-            height: 20px;
-            background-color: #000;
-            border-radius: 50%;
-            position: absolute;
-        }
-
-        .bullet {
-            width: 10px;
-            height: 10px;
-            background-color: #fff;
-            border-radius: 50%;
-            position: absolute;
         }
     </style>
 </head>
@@ -72,45 +47,15 @@
         <h1>Oyun</h1>
 
         <div class="ball"></div>
-
-        <div class="goal"></div>
-
-        <button id="next-level">Next Level</button>
     </div>
 
     <script>
         const ball = document.querySelector(".ball");
-        const goal = document.querySelector(".goal");
-        const enemies = [];
-        const bullets = [];
 
         function checkCollision() {
-            if (ball.getBoundingClientRect().top <= goal.getBoundingClientRect().top + goal.getBoundingClientRect().height &&
-                ball.getBoundingClientRect().left <= goal.getBoundingClientRect().left + goal.getBoundingClientRect().width &&
-                ball.getBoundingClientRect().right >= goal.getBoundingClientRect().left &&
-                ball.getBoundingClientRect().bottom >= goal.getBoundingClientRect().top) {
-                alert("Tebrikler! Kazandınız!");
-            }
-
-            for (const enemy of enemies) {
-                if (ball.getBoundingClientRect().top <= enemy.getBoundingClientRect().top + enemy.getBoundingClientRect().height &&
-                    ball.getBoundingClientRect().left <= enemy.getBoundingClientRect().left + enemy.getBoundingClientRect().width &&
-                    ball.getBoundingClientRect().right >= enemy.getBoundingClientRect().left &&
-                    ball.getBoundingClientRect().bottom >= enemy.getBoundingClientRect().top) {
-                    alert("Kaybettiniz!");
-                }
-            }
-
-            for (const bullet of bullets) {
-                for (const enemy of enemies) {
-                    if (bullet.getBoundingClientRect().top <= enemy.getBoundingClientRect().top + enemy.getBoundingClientRect().height &&
-                        bullet.getBoundingClientRect().left <= enemy.getBoundingClientRect().left + enemy.getBoundingClientRect().width &&
-                        bullet.getBoundingClientRect().right >= enemy.getBoundingClientRect().left &&
-                        bullet.getBoundingClientRect().bottom >= enemy.getBoundingClientRect().top) {
-                        enemies.splice(enemies.indexOf(enemy), 1);
-                        bullets.splice(bullets.indexOf(bullet), 1);
-                    }
-                }
+            if (ball.getBoundingClientRect().top <= 0 || ball.getBoundingClientRect().top >= 300 ||
+                ball.getBoundingClientRect().left <= 0 || ball.getBoundingClientRect().left >= 300) {
+                alert("Kaybettiniz!");
             }
         }
 
@@ -120,4 +65,19 @@
                     ball.style.top = parseInt(ball.style.top) - 10 + "px";
                     break;
                 case 40: // Aşağı ok
-                    ball.style.top = parseInt(ball.style
+                    ball.style.top = parseInt(ball.style.top) + 10 + "px";
+                    break;
+                case 37: // Sol ok
+                    ball.style.left = parseInt(ball.style.left) - 10 + "px";
+                    break;
+                case 39: // Sağ ok
+                    ball.style.left = parseInt(ball.style.left) + 10 + "px";
+                    break;
+            }
+
+            checkCollision();
+        });
+    </script>
+
+</body>
+</html>
