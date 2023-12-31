@@ -48,6 +48,14 @@
             top: 100px;
             left: 100px;
         }
+
+        .enemy {
+            width: 20px;
+            height: 20px;
+            background-color: #000;
+            border-radius: 50%;
+            position: absolute;
+        }
     </style>
 </head>
 <body>
@@ -58,11 +66,14 @@
         <div class="ball"></div>
 
         <div class="goal"></div>
+
+        <button id="next-level">Next Level</button>
     </div>
 
     <script>
         const ball = document.querySelector(".ball");
         const goal = document.querySelector(".goal");
+        const enemies = [];
 
         function checkCollision() {
             if (ball.getBoundingClientRect().top <= goal.getBoundingClientRect().top + goal.getBoundingClientRect().height &&
@@ -70,6 +81,15 @@
                 ball.getBoundingClientRect().right >= goal.getBoundingClientRect().left &&
                 ball.getBoundingClientRect().bottom >= goal.getBoundingClientRect().top) {
                 alert("Tebrikler! Kazandınız!");
+            }
+
+            for (const enemy of enemies) {
+                if (ball.getBoundingClientRect().top <= enemy.getBoundingClientRect().top + enemy.getBoundingClientRect().height &&
+                    ball.getBoundingClientRect().left <= enemy.getBoundingClientRect().left + enemy.getBoundingClientRect().width &&
+                    ball.getBoundingClientRect().right >= enemy.getBoundingClientRect().left &&
+                    ball.getBoundingClientRect().bottom >= enemy.getBoundingClientRect().top) {
+                    alert("Kaybettiniz!");
+                }
             }
         }
 
@@ -91,6 +111,13 @@
 
             checkCollision();
         });
-    </script>
-</body>
-</html>
+
+        function startGame() {
+            const level = 1;
+
+            function createEnemy() {
+                const enemy = document.createElement("div");
+                enemy.className = "enemy";
+                enemy.style.top = Math.floor(Math.random() * 300) + "px";
+                enemy.style.left = Math.floor(Math.random() * 300) + "px";
+
