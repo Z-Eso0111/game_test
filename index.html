@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Oyun</title>
+
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #fff;
+        }
+
+        .ball {
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            animation: move 2s infinite;
+        }
+
+        @keyframes move {
+            from {
+                top: 50px;
+                left: 50px;
+            }
+            to {
+                top: 250px;
+                left: 250px;
+            }
+        }
+
+        .goal {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Oyun</h1>
+
+        <div class="ball"></div>
+
+        <div class="goal"></div>
+    </div>
+
+    <script>
+        const ball = document.querySelector(".ball");
+        const goal = document.querySelector(".goal");
+
+        function checkCollision() {
+            if (ball.getBoundingClientRect().top <= goal.getBoundingClientRect().top + goal.getBoundingClientRect().height &&
+                ball.getBoundingClientRect().left <= goal.getBoundingClientRect().left + goal.getBoundingClientRect().width &&
+                ball.getBoundingClientRect().right >= goal.getBoundingClientRect().left &&
+                ball.getBoundingClientRect().bottom >= goal.getBoundingClientRect().top) {
+                alert("Tebrikler! Kazandınız!");
+            }
+        }
+
+        window.addEventListener("keydown", (event) => {
+            switch (event.keyCode) {
+                case 38: // Yukarı ok
+                    ball.style.top = parseInt(ball.style.top) - 10 + "px";
+                    break;
+                case 40: // Aşağı ok
+                    ball.style.top = parseInt(ball.style.top) + 10 + "px";
+                    break;
+                case 37: // Sol ok
+                    ball.style.left = parseInt(ball.style.left) - 10 + "px";
+                    break;
+                case 39: // Sağ ok
+                    ball.style.left = parseInt(ball.style.left) + 10 + "px";
+                    break;
+            }
+
+            checkCollision();
+        });
+    </script>
+</body>
+</html>
