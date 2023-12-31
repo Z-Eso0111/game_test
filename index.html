@@ -53,9 +53,11 @@
 
             ball.style.left = ball.offsetLeft + xDiff + "px";
             ball.style.top = ball.offsetTop + yDiff + "px";
+
+            // Animasyon efektini ayarla
+            ball.style.transition = "left 1s ease-in-out, top 1s ease-in-out";
         }, 100);
     </script>
 
 </body>
 </html>
-
