@@ -39,10 +39,22 @@
     <script>
         const ball = document.querySelector(".ball");
 
-        ball.style.top = Math.floor(window.innerHeight / 2) + "px";
-        ball.style.left = Math.floor(window.innerWidth / 2) + "px";
+        let mouseX = 0;
+        let mouseY = 0;
+
+        window.addEventListener("mousemove", (event) => {
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        });
+
+        setInterval(() => {
+            const xDiff = mouseX - ball.offsetLeft;
+            const yDiff = mouseY - ball.offsetTop;
+
+            ball.style.left = ball.offsetLeft + (xDiff / 10) + "px";
+            ball.style.top = ball.offsetTop + (yDiff / 10) + "px";
+        }, 100);
     </script>
 
 </body>
 </html>
-
